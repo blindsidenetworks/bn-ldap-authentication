@@ -28,4 +28,22 @@ module LdapAuthenticator
             password: user_params[:password]
         )
     end
+
+    def parse_auth(result)
+        auth = {}
+        auth['info'] = {}
+        auth['uid'] = result.dn
+        auth['provider'] = :ldap
+
+        LDAP_ATTRIBUTE_MAPPING.each do |key, value|
+            value.each do |v|
+                if result[v].first
+                    auth['info'][key] = result[v].first
+                    break
+                end
+            end
+        end
+
+        auth
+    end
 end
