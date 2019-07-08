@@ -1,0 +1,19 @@
+PATH
+  remote: .
+  specs:
+    bn-ldap-authentication (1.0.0)
+      net-ldap
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    net-ldap (0.16.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bn-ldap-authentication!
+
+BUNDLED WITH
+   1.17.2
