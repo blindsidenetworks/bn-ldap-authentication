@@ -29,7 +29,7 @@ module LdapAuthenticator
         )
     end
 
-    def parse_auth(result)
+    def parse_auth(result, role_field)
         auth = {}
         auth['info'] = {}
         auth['uid'] = result.dn
@@ -43,6 +43,8 @@ module LdapAuthenticator
                 end
             end
         end
+
+        auth['info']['roles'] = result[role_field].first
 
         auth
     end
