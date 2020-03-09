@@ -2,7 +2,7 @@
 
 module LdapAuthenticator
     LDAP_ATTRIBUTE_MAPPING = {
-        'name' => [:cn],
+        'name' => [:displayName, :cn],
         'first_name' => [:givenName],
         'last_name' => [:sn],
         'email' => [:mail, :email, :userPrincipalName],
