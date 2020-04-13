@@ -11,14 +11,28 @@ module LdapAuthenticator
     }
 
     def send_ldap_request(user_params, provider_info)
-        ldap = Net::LDAP.new(
-            host: provider_info[:host],
-            port: provider_info[:port],
-            auth: {
+        case provider_info[:auth_method]
+        when 'anonymous'
+            auth = {
+                method: :anonymous
+            }
+        when 'user'
+            auth = {
+                method: :simple,
+                username: provider_info[:uid] + '=' + user_params[:username] + ',' + provider_info[:base],
+                password: user_params[:password]
+            }
+        else
+            auth = {
                 method: :simple,
                 username: provider_info[:bind_dn],
                 password: provider_info[:password]
-            },
+            }
+        end
+        ldap = Net::LDAP.new(
+            host: provider_info[:host],
+            port: provider_info[:port],
+            auth: auth,
             encryption: provider_info[:encryption]
         )
 
