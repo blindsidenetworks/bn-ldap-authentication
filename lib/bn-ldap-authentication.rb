@@ -37,7 +37,7 @@ module LdapAuthenticator
         )
 
         ldap_filter = Net::LDAP::Filter.eq(provider_info[:uid], user_params[:username])
-        if provider_info[:filter]
+        if provider_info[:filter].present?
           ldap_filter = ldap_filter & Net::LDAP::Filter.construct(provider_info[:filter])
         end
 
