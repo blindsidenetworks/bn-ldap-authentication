@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "bn-ldap-authentication"
-  spec.version       = "0.1.3"
+  spec.version       = "0.1.4"
   spec.authors       = ["shawn-higgins1"]
   spec.email         = ["23224097+shawn-higgins1@users.noreply.github.com"]
 
