@@ -18,9 +18,15 @@ module LdapAuthenticator
           method: :anonymous
       }
     when 'user'
-      auth = {
+      username = nil
+      if provider_info[:domain].present?
+        username = provider_info[:domain] + '\\' + user_params[:username]
+      else
+        username = provider_info[:uid] + '=' + user_params[:username] + ',' + provider_info[:base]
+      end
+	  auth = {
         method: :simple,
-        username: provider_info[:uid] + '=' + user_params[:username] + ',' + provider_info[:base],
+        username: username,
         password: user_params[:password]
       }
     else
